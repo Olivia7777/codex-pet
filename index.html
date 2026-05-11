@@ -635,7 +635,7 @@
 
     .booking-box {
       display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1fr);
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
       gap: 36px;
       align-items: center;
     }
@@ -651,16 +651,24 @@
       font-size: 17px;
     }
 
+    .location-layout {
+      display: grid;
+      grid-template-columns: minmax(190px, 0.75fr) minmax(280px, 1.25fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-top: 28px;
+    }
+
     .contact-list {
       display: grid;
       gap: 12px;
-      margin-top: 28px;
       color: var(--ink);
       font-weight: 700;
+      align-content: center;
     }
 
     .location-map-card {
-      margin-top: 24px;
+      margin: 0;
       overflow: hidden;
       border-radius: 8px;
       border: 1px solid rgba(232, 222, 209, 0.92);
@@ -670,7 +678,9 @@
 
     .location-map-card img {
       aspect-ratio: 16 / 9;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
+      background: #f7f2eb;
     }
 
     .map-caption {
@@ -785,6 +795,10 @@
         grid-template-columns: 1fr;
       }
 
+      .location-layout {
+        grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr);
+      }
+
       .hero {
         padding-top: 44px;
       }
@@ -827,6 +841,7 @@
 
       .hero-actions,
       .stats,
+      .location-layout,
       .form-row {
         grid-template-columns: 1fr;
       }
@@ -1075,18 +1090,20 @@
         <div class="booking-info">
           <h2>给毛孩子留一个舒服的洗护时段</h2>
           <p>提交信息后，门店会根据宠物体型、毛量和服务项目确认预计时长与价格。</p>
-          <div class="contact-list">
-            <span>营业时间：周一至周日 10:00-20:00</span>
-            <span>门店地址：上海市宜川路街道陕西北路1820号（近宜川生活广场）</span>
-            <span>预约电话：021-8888-6620</span>
+          <div class="location-layout">
+            <div class="contact-list">
+              <span>营业时间：周一至周日 10:00-20:00</span>
+              <span>门店地址：上海市宜川路街道陕西北路1820号（近宜川生活广场）</span>
+              <span>预约电话：021-8888-6620</span>
+            </div>
+            <figure class="location-map-card">
+              <img src="assets/location/location-map.png" alt="沐爪宠物洗护店位置地图，标注上海市宜川路街道陕西北路1820号，近宜川生活广场">
+              <figcaption class="map-caption">
+                <strong>沐爪宠物洗护 · 陕西北路1820号</strong>
+                <span>位于上海市宜川路街道，近宜川生活广场，建议到店前电话确认当日洗护时段。</span>
+              </figcaption>
+            </figure>
           </div>
-          <figure class="location-map-card">
-            <img src="assets/location/location-map.png" alt="沐爪宠物洗护店位置地图，标注上海市宜川路街道陕西北路1820号，近宜川生活广场">
-            <figcaption class="map-caption">
-              <strong>沐爪宠物洗护 · 陕西北路1820号</strong>
-              <span>位于上海市宜川路街道，近宜川生活广场，建议到店前电话确认当日洗护时段。</span>
-            </figcaption>
-          </figure>
         </div>
         <form class="booking-form" id="bookingForm">
           <div class="form-row">

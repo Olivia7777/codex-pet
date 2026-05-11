@@ -327,21 +327,23 @@ export default function Home() {
             <div className="booking-info">
               <h2>给毛孩子留一个舒服的洗护时段</h2>
               <p>提交信息后，门店会根据宠物体型、毛量和服务项目确认预计时长与价格。</p>
-              <div className="contact-list">
-                <span>营业时间：周一至周日 10:00-20:00</span>
-                <span>门店地址：上海市宜川路街道陕西北路1820号（近宜川生活广场）</span>
-                <span>预约电话：021-8888-6620</span>
+              <div className="location-layout">
+                <div className="contact-list">
+                  <span>营业时间：周一至周日 10:00-20:00</span>
+                  <span>门店地址：上海市宜川路街道陕西北路1820号（近宜川生活广场）</span>
+                  <span>预约电话：021-8888-6620</span>
+                </div>
+                <figure className="location-map-card">
+                  <img
+                    src="/assets/location/location-map.png"
+                    alt="沐爪宠物洗护店位置地图，标注上海市宜川路街道陕西北路1820号，近宜川生活广场"
+                  />
+                  <figcaption className="map-caption">
+                    <strong>沐爪宠物洗护 · 陕西北路1820号</strong>
+                    <span>位于上海市宜川路街道，近宜川生活广场，建议到店前电话确认当日洗护时段。</span>
+                  </figcaption>
+                </figure>
               </div>
-              <figure className="location-map-card">
-                <img
-                  src="/assets/location/location-map.png"
-                  alt="沐爪宠物洗护店位置地图，标注上海市宜川路街道陕西北路1820号，近宜川生活广场"
-                />
-                <figcaption className="map-caption">
-                  <strong>沐爪宠物洗护 · 陕西北路1820号</strong>
-                  <span>位于上海市宜川路街道，近宜川生活广场，建议到店前电话确认当日洗护时段。</span>
-                </figcaption>
-              </figure>
             </div>
             <form className="booking-form" onSubmit={handleBookingSubmit}>
               <div className="form-row">
