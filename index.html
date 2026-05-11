@@ -1121,8 +1121,12 @@
             </div>
           </div>
           <div class="field">
+            <label for="arrival">期望到店</label>
+            <input id="arrival" name="arrival" type="datetime-local" required>
+          </div>
+          <div class="field">
             <label for="message">备注</label>
-            <textarea id="message" name="message" placeholder="例如：胆小、毛结、皮肤敏感、期望到店时间"></textarea>
+            <textarea id="message" name="message" placeholder="例如：胆小、毛结、皮肤敏感"></textarea>
           </div>
           <button class="btn btn-primary" type="submit">提交预约</button>
           <p class="notice" id="notice" role="status"></p>

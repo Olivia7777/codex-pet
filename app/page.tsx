@@ -376,11 +376,15 @@ export default function Home() {
                 </div>
               </div>
               <div className="field">
+                <label htmlFor="arrival">期望到店</label>
+                <input id="arrival" name="arrival" type="datetime-local" required />
+              </div>
+              <div className="field">
                 <label htmlFor="message">备注</label>
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="例如：胆小、毛结、皮肤敏感、期望到店时间"
+                  placeholder="例如：胆小、毛结、皮肤敏感"
                 />
               </div>
               <button className="btn btn-primary" type="submit">
