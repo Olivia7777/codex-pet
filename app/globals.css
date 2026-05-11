@@ -727,7 +727,7 @@ section {
 
 .booking-box {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
   gap: 36px;
   align-items: center;
 }
@@ -743,16 +743,24 @@ section {
   font-size: 17px;
 }
 
+.location-layout {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.75fr) minmax(280px, 1.25fr);
+  gap: 22px;
+  align-items: stretch;
+  margin-top: 28px;
+}
+
 .contact-list {
   display: grid;
   gap: 12px;
-  margin-top: 28px;
   color: var(--ink);
   font-weight: 700;
+  align-content: center;
 }
 
 .location-map-card {
-  margin-top: 24px;
+  margin: 0;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid rgba(232, 222, 209, 0.92);
@@ -762,7 +770,9 @@ section {
 
 .location-map-card img {
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
+  background: #f7f2eb;
 }
 
 .map-caption {
@@ -877,6 +887,10 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .location-layout {
+    grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr);
+  }
+
   .hero {
     padding-top: 44px;
   }
@@ -931,6 +945,7 @@ textarea {
 
   .hero-actions,
   .stats,
+  .location-layout,
   .form-row {
     grid-template-columns: 1fr;
   }
