@@ -580,6 +580,45 @@ section {
   background: #ffffff;
 }
 
+.reviews-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.review-controls {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.review-arrow {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.review-arrow:hover {
+  transform: translateY(-2px);
+  background: var(--coral);
+}
+
+.review-carousel {
+  overflow: hidden;
+}
+
 .review-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -588,6 +627,18 @@ section {
 
 .review-card {
   padding: 24px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  animation: review-card-in 520ms ease both;
+}
+
+.review-card:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.review-card:nth-child(3) {
+  animation-delay: 160ms;
 }
 
 .stars {
@@ -598,6 +649,7 @@ section {
 
 .review-card p {
   color: var(--muted);
+  flex: 1;
 }
 
 .reviewer {
@@ -608,6 +660,21 @@ section {
   font-weight: 800;
 }
 
+.reviewer span:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+.reviewer strong {
+  font-size: 16px;
+}
+
+.reviewer small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .avatar {
   width: 42px;
   height: 42px;
@@ -616,6 +683,42 @@ section {
   place-items: center;
   background: #ffe7dc;
   color: var(--coral);
+}
+
+.review-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.review-dot {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #d8e1dc;
+  cursor: pointer;
+  transition:
+    width 180ms ease,
+    background 180ms ease;
+}
+
+.review-dot.active {
+  width: 28px;
+  background: var(--mint);
+}
+
+@keyframes review-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .booking {
@@ -778,6 +881,10 @@ textarea {
     padding-top: 44px;
   }
 
+  .reviews-head {
+    align-items: flex-start;
+  }
+
   .hero-photo,
   .environment-carousel,
   .environment-slide,
@@ -789,6 +896,10 @@ textarea {
   .service-grid,
   .review-grid {
     grid-template-columns: 1fr;
+  }
+
+  .review-card:nth-child(n + 2) {
+    display: none;
   }
 }
 
@@ -808,6 +919,10 @@ textarea {
   .brand-mark {
     width: 36px;
     height: 36px;
+  }
+
+  .reviews-head {
+    display: grid;
   }
 
   .hero {

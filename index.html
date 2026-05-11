@@ -587,6 +587,45 @@
       background: #ffffff;
     }
 
+    .reviews-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-end;
+    }
+
+    .review-controls {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .review-arrow {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        background 180ms ease;
+    }
+
+    .review-arrow:hover {
+      transform: translateY(-2px);
+      background: var(--coral);
+    }
+
+    .review-carousel {
+      overflow: hidden;
+    }
+
     .review-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -595,6 +634,18 @@
 
     .review-card {
       padding: 24px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      animation: review-card-in 520ms ease both;
+    }
+
+    .review-card:nth-child(2) {
+      animation-delay: 80ms;
+    }
+
+    .review-card:nth-child(3) {
+      animation-delay: 160ms;
     }
 
     .stars {
@@ -609,6 +660,7 @@
 
     .review-card p {
       color: var(--muted);
+      flex: 1;
     }
 
     .reviewer {
@@ -619,6 +671,21 @@
       font-weight: 800;
     }
 
+    .reviewer span:last-child {
+      display: grid;
+      gap: 3px;
+    }
+
+    .reviewer strong {
+      font-size: 16px;
+    }
+
+    .reviewer small {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .avatar {
       width: 42px;
       height: 42px;
@@ -627,6 +694,42 @@
       place-items: center;
       background: #ffe7dc;
       color: var(--coral);
+    }
+
+    .review-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .review-dot {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 999px;
+      background: #d8e1dc;
+      cursor: pointer;
+      transition:
+        width 180ms ease,
+        background 180ms ease;
+    }
+
+    .review-dot.active {
+      width: 28px;
+      background: var(--mint);
+    }
+
+    @keyframes review-card-in {
+      from {
+        opacity: 0;
+        transform: translateX(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .booking {
@@ -789,6 +892,10 @@
         padding-top: 44px;
       }
 
+      .reviews-head {
+        align-items: flex-start;
+      }
+
       .hero-photo,
       .environment-carousel,
       .environment-slide,
@@ -800,6 +907,10 @@
       .service-grid,
       .review-grid {
         grid-template-columns: 1fr;
+      }
+
+      .review-card:nth-child(n + 2) {
+        display: none;
       }
     }
 
@@ -819,6 +930,10 @@
       .brand-mark {
         width: 36px;
         height: 36px;
+      }
+
+      .reviews-head {
+        display: grid;
       }
 
       .hero {
@@ -1046,27 +1161,20 @@
 
     <section class="reviews" id="reviews">
       <div class="section-inner">
-        <div class="section-head">
-          <h2>附近铲屎官的真实反馈</h2>
-          <p>很多顾客第一次来只是想试试，后来就把固定洗护时间交给我们了。</p>
+        <div class="section-head reviews-head">
+          <div>
+            <h2>附近铲屎官的真实反馈</h2>
+            <p>很多顾客第一次来只是想试试，后来就把固定洗护时间交给我们了。</p>
+          </div>
+          <div class="review-controls" aria-label="评价轮播控制">
+            <button type="button" class="review-arrow" aria-label="上一组评价" data-review-prev>‹</button>
+            <button type="button" class="review-arrow" aria-label="下一组评价" data-review-next>›</button>
+          </div>
         </div>
-        <div class="review-grid">
-          <article class="card review-card">
-            <div class="stars" aria-label="五星评价">★★★★★</div>
-            <p>我家小比熊以前洗澡会发抖，这次洗完还愿意在店里转悠。造型也很自然，没有剪得太夸张。</p>
-            <div class="reviewer"><span class="avatar">米</span><span>米粒主人</span></div>
-          </article>
-          <article class="card review-card">
-            <div class="stars" aria-label="五星评价">★★★★★</div>
-            <p>洗护师会先摸皮肤和毛结，猫咪紧张时也会停下来安抚。接回家的时候香味很淡，很舒服。</p>
-            <div class="reviewer"><span class="avatar">桃</span><span>桃子主人</span></div>
-          </article>
-          <article class="card review-card">
-            <div class="stars" aria-label="五星评价">★★★★★</div>
-            <p>店里很明亮，流程也透明。最喜欢的是会提醒耳朵和脚垫的小问题，感觉真的有认真观察。</p>
-            <div class="reviewer"><span class="avatar">豆</span><span>豆包主人</span></div>
-          </article>
+        <div class="review-carousel" aria-live="polite">
+          <div class="review-grid" id="reviewGrid"></div>
         </div>
+        <div class="review-dots" id="reviewDots" aria-label="评价轮播进度"></div>
       </div>
     </section>
 
@@ -1150,8 +1258,64 @@
     const environmentSlides = [...document.querySelectorAll(".environment-slide")];
     const prevEnvironment = document.querySelector("[data-carousel-prev]");
     const nextEnvironment = document.querySelector("[data-carousel-next]");
+    const reviewGrid = document.querySelector("#reviewGrid");
+    const reviewDots = document.querySelector("#reviewDots");
+    const prevReview = document.querySelector("[data-review-prev]");
+    const nextReview = document.querySelector("[data-review-next]");
+    const customerReviews = [
+      {
+        name: "米粒主人",
+        avatar: "米",
+        pet: "比熊 · 基础洗护",
+        text: "我家小比熊以前洗澡会发抖，这次洗完还愿意在店里转悠。造型很自然，没有剪得太夸张。",
+      },
+      {
+        name: "桃子主人",
+        avatar: "桃",
+        pet: "英短 · 低应激洗护",
+        text: "洗护师会先摸皮肤和毛结，猫咪紧张时也会停下来安抚。接回家的时候香味很淡，很舒服。",
+      },
+      {
+        name: "豆包主人",
+        avatar: "豆",
+        pet: "柯基 · 洗澡修爪",
+        text: "店里很明亮，流程也透明。最喜欢的是会提醒耳朵和脚垫的小问题，感觉真的有认真观察。",
+      },
+      {
+        name: "糯糯主人",
+        avatar: "糯",
+        pet: "布偶 · 开结护理",
+        text: "长毛猫开结没有硬扯，先跟我说明哪些地方需要慢慢处理。回家后毛顺了很多，猫也没有躲起来。",
+      },
+      {
+        name: "Lucky 主人",
+        avatar: "L",
+        pet: "金毛 · 皮毛养护",
+        text: "大狗洗护最怕赶时间，这里会预留足够时长。吹干得很透，胸口和尾巴都蓬蓬的，摸起来特别干净。",
+      },
+      {
+        name: "小七主人",
+        avatar: "七",
+        pet: "泰迪 · 精修造型",
+        text: "造型前会确认脸型和耳朵长度，剪完不是模板感，跟小七原本的样子很搭。照片发家族群都说可爱。",
+      },
+      {
+        name: "奶盖主人",
+        avatar: "奶",
+        pet: "暹罗 · 洗护初体验",
+        text: "第一次带猫来店里，工作人员没有急着上手，先让它闻环境。整个过程很稳，后来预约就固定这里了。",
+      },
+      {
+        name: "啵啵主人",
+        avatar: "啵",
+        pet: "雪纳瑞 · 洁牙护理",
+        text: "服务结束会讲清楚今天做了什么，也会给日常梳毛建议。不是只把宠物洗干净，感觉更像长期护理。",
+      },
+    ];
     let environmentIndex = 0;
+    let reviewIndex = 0;
     let environmentTimer;
+    let reviewTimer;
 
     function showEnvironmentSlide(index) {
       environmentIndex = (index + environmentSlides.length) % environmentSlides.length;
@@ -1167,6 +1331,56 @@
       environmentTimer = setInterval(() => {
         showEnvironmentSlide(environmentIndex + 1);
       }, 5200);
+    }
+
+    function wrapReviewIndex(index) {
+      return (index + customerReviews.length) % customerReviews.length;
+    }
+
+    function renderReviews(index) {
+      reviewIndex = wrapReviewIndex(index);
+      reviewGrid.innerHTML = [0, 1, 2]
+        .map((offset) => {
+          const review = customerReviews[wrapReviewIndex(reviewIndex + offset)];
+
+          return `
+            <article class="card review-card">
+              <div class="stars" aria-label="五星评价">★★★★★</div>
+              <p>${review.text}</p>
+              <div class="reviewer">
+                <span class="avatar">${review.avatar}</span>
+                <span><strong>${review.name}</strong><small>${review.pet}</small></span>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      reviewDots.innerHTML = customerReviews
+        .map((review, dotIndex) => `
+          <button
+            type="button"
+            class="${dotIndex === reviewIndex ? "review-dot active" : "review-dot"}"
+            aria-label="查看${review.name}的评价"
+            ${dotIndex === reviewIndex ? 'aria-current="true"' : ""}
+            data-review-dot="${dotIndex}"
+          ></button>
+        `)
+        .join("");
+
+      reviewDots.querySelectorAll("[data-review-dot]").forEach((dot) => {
+        dot.addEventListener("click", () => {
+          renderReviews(Number(dot.dataset.reviewDot));
+          startReviewCarousel();
+        });
+      });
+    }
+
+    function startReviewCarousel() {
+      clearInterval(reviewTimer);
+      reviewTimer = setInterval(() => {
+        renderReviews(reviewIndex + 1);
+      }, 4600);
     }
 
     environmentTabs.forEach((tab) => {
@@ -1186,7 +1400,19 @@
       startEnvironmentCarousel();
     });
 
+    prevReview.addEventListener("click", () => {
+      renderReviews(reviewIndex - 1);
+      startReviewCarousel();
+    });
+
+    nextReview.addEventListener("click", () => {
+      renderReviews(reviewIndex + 1);
+      startReviewCarousel();
+    });
+
+    renderReviews(0);
     startEnvironmentCarousel();
+    startReviewCarousel();
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();

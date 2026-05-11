@@ -36,12 +36,68 @@ const environmentSlides = [
   },
 ];
 
+const customerReviews = [
+  {
+    name: "米粒主人",
+    avatar: "米",
+    pet: "比熊 · 基础洗护",
+    text: "我家小比熊以前洗澡会发抖，这次洗完还愿意在店里转悠。造型很自然，没有剪得太夸张。",
+  },
+  {
+    name: "桃子主人",
+    avatar: "桃",
+    pet: "英短 · 低应激洗护",
+    text: "洗护师会先摸皮肤和毛结，猫咪紧张时也会停下来安抚。接回家的时候香味很淡，很舒服。",
+  },
+  {
+    name: "豆包主人",
+    avatar: "豆",
+    pet: "柯基 · 洗澡修爪",
+    text: "店里很明亮，流程也透明。最喜欢的是会提醒耳朵和脚垫的小问题，感觉真的有认真观察。",
+  },
+  {
+    name: "糯糯主人",
+    avatar: "糯",
+    pet: "布偶 · 开结护理",
+    text: "长毛猫开结没有硬扯，先跟我说明哪些地方需要慢慢处理。回家后毛顺了很多，猫也没有躲起来。",
+  },
+  {
+    name: "Lucky 主人",
+    avatar: "L",
+    pet: "金毛 · 皮毛养护",
+    text: "大狗洗护最怕赶时间，这里会预留足够时长。吹干得很透，胸口和尾巴都蓬蓬的，摸起来特别干净。",
+  },
+  {
+    name: "小七主人",
+    avatar: "七",
+    pet: "泰迪 · 精修造型",
+    text: "造型前会确认脸型和耳朵长度，剪完不是模板感，跟小七原本的样子很搭。照片发家族群都说可爱。",
+  },
+  {
+    name: "奶盖主人",
+    avatar: "奶",
+    pet: "暹罗 · 洗护初体验",
+    text: "第一次带猫来店里，工作人员没有急着上手，先让它闻环境。整个过程很稳，后来预约就固定这里了。",
+  },
+  {
+    name: "啵啵主人",
+    avatar: "啵",
+    pet: "雪纳瑞 · 洁牙护理",
+    text: "服务结束会讲清楚今天做了什么，也会给日常梳毛建议。不是只把宠物洗干净，感觉更像长期护理。",
+  },
+];
+
 function wrapSlideIndex(index: number) {
   return (index + environmentSlides.length) % environmentSlides.length;
 }
 
+function wrapReviewIndex(index: number) {
+  return (index + customerReviews.length) % customerReviews.length;
+}
+
 export default function Home() {
   const [environmentIndex, setEnvironmentIndex] = useState(0);
+  const [reviewIndex, setReviewIndex] = useState(0);
   const [notice, setNotice] = useState("");
 
   useEffect(() => {
@@ -51,6 +107,14 @@ export default function Home() {
 
     return () => window.clearInterval(timer);
   }, [environmentIndex]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setReviewIndex((currentIndex) => wrapReviewIndex(currentIndex + 1));
+    }, 4600);
+
+    return () => window.clearInterval(timer);
+  }, [reviewIndex]);
 
   function handleBookingSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -283,41 +347,64 @@ export default function Home() {
 
         <section className="reviews" id="reviews">
           <div className="section-inner">
-            <div className="section-head">
-              <h2>附近铲屎官的真实反馈</h2>
-              <p>很多顾客第一次来只是想试试，后来就把固定洗护时间交给我们了。</p>
+            <div className="section-head reviews-head">
+              <div>
+                <h2>附近铲屎官的真实反馈</h2>
+                <p>很多顾客第一次来只是想试试，后来就把固定洗护时间交给我们了。</p>
+              </div>
+              <div className="review-controls" aria-label="评价轮播控制">
+                <button
+                  type="button"
+                  className="review-arrow"
+                  aria-label="上一组评价"
+                  onClick={() => setReviewIndex((currentIndex) => wrapReviewIndex(currentIndex - 1))}
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className="review-arrow"
+                  aria-label="下一组评价"
+                  onClick={() => setReviewIndex((currentIndex) => wrapReviewIndex(currentIndex + 1))}
+                >
+                  ›
+                </button>
+              </div>
             </div>
-            <div className="review-grid">
-              <article className="card review-card">
-                <div className="stars" aria-label="五星评价">
-                  ★★★★★
-                </div>
-                <p>我家小比熊以前洗澡会发抖，这次洗完还愿意在店里转悠。造型也很自然，没有剪得太夸张。</p>
-                <div className="reviewer">
-                  <span className="avatar">米</span>
-                  <span>米粒主人</span>
-                </div>
-              </article>
-              <article className="card review-card">
-                <div className="stars" aria-label="五星评价">
-                  ★★★★★
-                </div>
-                <p>洗护师会先摸皮肤和毛结，猫咪紧张时也会停下来安抚。接回家的时候香味很淡，很舒服。</p>
-                <div className="reviewer">
-                  <span className="avatar">桃</span>
-                  <span>桃子主人</span>
-                </div>
-              </article>
-              <article className="card review-card">
-                <div className="stars" aria-label="五星评价">
-                  ★★★★★
-                </div>
-                <p>店里很明亮，流程也透明。最喜欢的是会提醒耳朵和脚垫的小问题，感觉真的有认真观察。</p>
-                <div className="reviewer">
-                  <span className="avatar">豆</span>
-                  <span>豆包主人</span>
-                </div>
-              </article>
+            <div className="review-carousel" aria-live="polite">
+              <div className="review-grid" key={reviewIndex}>
+                {[0, 1, 2].map((offset) => {
+                  const review = customerReviews[wrapReviewIndex(reviewIndex + offset)];
+
+                  return (
+                    <article className="card review-card" key={`${review.name}-${reviewIndex}`}>
+                      <div className="stars" aria-label="五星评价">
+                        ★★★★★
+                      </div>
+                      <p>{review.text}</p>
+                      <div className="reviewer">
+                        <span className="avatar">{review.avatar}</span>
+                        <span>
+                          <strong>{review.name}</strong>
+                          <small>{review.pet}</small>
+                        </span>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="review-dots" aria-label="评价轮播进度">
+              {customerReviews.map((review, index) => (
+                <button
+                  type="button"
+                  key={review.name}
+                  className={index === reviewIndex ? "review-dot active" : "review-dot"}
+                  aria-label={`查看${review.name}的评价`}
+                  aria-current={index === reviewIndex ? "true" : undefined}
+                  onClick={() => setReviewIndex(index)}
+                />
+              ))}
             </div>
           </div>
         </section>
